@@ -31,8 +31,7 @@ export const fetchClientRwa = createFetchClient<paths>({
 })
 
 export const fetchClient = flow(fetchClientRwa.request, async (res) => {
-  const awaitRes = await res
-  const { data, error, response } = awaitRes
+  const { data, error, response } = await res
   if (error != undefined) {
     throw new ResponseError(`Request failed with status ${String(response.status)}`, {
       cause: error as unknown as PayError,

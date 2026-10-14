@@ -18,33 +18,8 @@ export default defineConfig({
   plugins: ['react', 'import', 'react-perf', 'oxc', 'promise', 'typescript', 'unicorn', 'node'],
   jsPlugins: deferOxlintConfig.jsPlugins,
   rules: {
-    'import/consistent-type-specifier-style': 'error',
-    'import/no-duplicates': 'error',
-    'import/no-empty-named-blocks': 'error',
-    'object-shorthand': 'error',
-    'no-nested-ternary': 'off',
-    'prefer-template': 'error',
-    'react/button-has-type': 'error',
-    'react/jsx-boolean-value': 'error',
-    'react/jsx-curly-brace-presence': 'error',
-    'react/jsx-no-comment-textnodes': 'error',
-    'react/jsx-no-useless-fragment': 'error',
-    'react/no-array-index-key': 'error',
-    'react/no-danger': 'error',
-    'react/self-closing-comp': 'error',
-    'no-restricted-imports': [
-      'error',
-      {
-        paths: [
-          {
-            name: 'zod',
-            importNames: ['default'],
-            message: 'Please use { z } instead of importing from zod directly.',
-          },
-        ],
-      },
-    ],
     ...deferOxlintConfig.rules,
     'unicorn-js/name-replacements': 'off',
+    'unicorn-js/no-top-level-side-effects': 'off',
   },
 })
