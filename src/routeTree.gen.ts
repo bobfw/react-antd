@@ -11,34 +11,34 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as NeedAuthRouteRouteImport } from './routes/_need-auth/route'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as NeedAuthSplatRouteImport } from './routes/_need-auth/$'
 
 const NeedAuthIndexLazyRouteImport = createFileRoute('/_need-auth/')()
 const NeedAuthCommandModalLazyRouteImport = createFileRoute(
   '/_need-auth/command-modal',
 )()
-const NeedAuthTableIndexLazyRouteImport =
-  createFileRoute('/_need-auth/table/')()
 const NeedAuthStateReactQueryLazyRouteImport = createFileRoute(
   '/_need-auth/state/react-query',
 )()
+const NeedAuthTableIndexLazyRouteImport =
+  createFileRoute('/_need-auth/table/')()
 const NeedAuthStateJotaiIndexLazyRouteImport = createFileRoute(
   '/_need-auth/state/jotai/',
 )()
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
 const NeedAuthRouteRoute = NeedAuthRouteRouteImport.update({
   id: '/_need-auth',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/_need-auth/route.lazy').then((d) => d.Route),
 )
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
 const NeedAuthIndexLazyRoute = NeedAuthIndexLazyRouteImport.update({
   id: '/',
   path: '/',
@@ -46,6 +46,11 @@ const NeedAuthIndexLazyRoute = NeedAuthIndexLazyRouteImport.update({
 } as any).lazy(() =>
   import('./routes/_need-auth/index.lazy').then((d) => d.Route),
 )
+const NeedAuthSplatRoute = NeedAuthSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => NeedAuthRouteRoute,
+} as any)
 const NeedAuthCommandModalLazyRoute =
   NeedAuthCommandModalLazyRouteImport.update({
     id: '/command-modal',
@@ -54,18 +59,6 @@ const NeedAuthCommandModalLazyRoute =
   } as any).lazy(() =>
     import('./routes/_need-auth/command-modal.lazy').then((d) => d.Route),
   )
-const NeedAuthSplatRoute = NeedAuthSplatRouteImport.update({
-  id: '/$',
-  path: '/$',
-  getParentRoute: () => NeedAuthRouteRoute,
-} as any)
-const NeedAuthTableIndexLazyRoute = NeedAuthTableIndexLazyRouteImport.update({
-  id: '/table/',
-  path: '/table/',
-  getParentRoute: () => NeedAuthRouteRoute,
-} as any).lazy(() =>
-  import('./routes/_need-auth/table/index.lazy').then((d) => d.Route),
-)
 const NeedAuthStateReactQueryLazyRoute =
   NeedAuthStateReactQueryLazyRouteImport.update({
     id: '/state/react-query',
@@ -74,6 +67,13 @@ const NeedAuthStateReactQueryLazyRoute =
   } as any).lazy(() =>
     import('./routes/_need-auth/state/react-query.lazy').then((d) => d.Route),
   )
+const NeedAuthTableIndexLazyRoute = NeedAuthTableIndexLazyRouteImport.update({
+  id: '/table/',
+  path: '/table/',
+  getParentRoute: () => NeedAuthRouteRoute,
+} as any).lazy(() =>
+  import('./routes/_need-auth/table/index.lazy').then((d) => d.Route),
+)
 const NeedAuthStateJotaiIndexLazyRoute =
   NeedAuthStateJotaiIndexLazyRouteImport.update({
     id: '/state/jotai/',
@@ -150,18 +150,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_need-auth': {
       id: '/_need-auth'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof NeedAuthRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_need-auth/': {
@@ -171,13 +171,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeedAuthIndexLazyRouteImport
       parentRoute: typeof NeedAuthRouteRoute
     }
-    '/_need-auth/command-modal': {
-      id: '/_need-auth/command-modal'
-      path: '/command-modal'
-      fullPath: '/command-modal'
-      preLoaderRoute: typeof NeedAuthCommandModalLazyRouteImport
-      parentRoute: typeof NeedAuthRouteRoute
-    }
     '/_need-auth/$': {
       id: '/_need-auth/$'
       path: '/$'
@@ -185,11 +178,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeedAuthSplatRouteImport
       parentRoute: typeof NeedAuthRouteRoute
     }
-    '/_need-auth/table/': {
-      id: '/_need-auth/table/'
-      path: '/table'
-      fullPath: '/table/'
-      preLoaderRoute: typeof NeedAuthTableIndexLazyRouteImport
+    '/_need-auth/command-modal': {
+      id: '/_need-auth/command-modal'
+      path: '/command-modal'
+      fullPath: '/command-modal'
+      preLoaderRoute: typeof NeedAuthCommandModalLazyRouteImport
       parentRoute: typeof NeedAuthRouteRoute
     }
     '/_need-auth/state/react-query': {
@@ -197,6 +190,13 @@ declare module '@tanstack/react-router' {
       path: '/state/react-query'
       fullPath: '/state/react-query'
       preLoaderRoute: typeof NeedAuthStateReactQueryLazyRouteImport
+      parentRoute: typeof NeedAuthRouteRoute
+    }
+    '/_need-auth/table/': {
+      id: '/_need-auth/table/'
+      path: '/table'
+      fullPath: '/table/'
+      preLoaderRoute: typeof NeedAuthTableIndexLazyRouteImport
       parentRoute: typeof NeedAuthRouteRoute
     }
     '/_need-auth/state/jotai/': {

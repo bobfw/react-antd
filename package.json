@@ -10,11 +10,11 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "format": "oxfmt",
-    "lint": "oxlint .",
+    "dev": "vp dev",
+    "build": "tsc -b && vp build",
+    "preview": "vp preview",
+    "format": "vp fmt",
+    "lint": "vp lint .",
     "check": "pnpm run format && tsc -b tsconfig.app.json && pnpm run lint",
     "gc-open-api": "openapi-typescript https://raw.githubusercontent.com/sebastienlevert/jsonplaceholder-api/refs/heads/main/openapi.yaml -o ./src/comm/openapi/schema.d.ts",
     "prepare": "husky",
@@ -52,12 +52,10 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "openapi-typescript": "^7.13.0",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.87.0",
-    "oxlint-tsgolint": "^7.0.2004",
     "tailwindcss": "^4.3.3",
     "typescript": "7.0.2",
-    "vite": "^8.3.4"
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   },
   "packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916"
 }

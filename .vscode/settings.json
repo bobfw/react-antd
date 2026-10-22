@@ -43,5 +43,8 @@
     "**/routeTree.gen.ts": true
   },
   "cSpell.words": ["oxlint"],
-  "js/ts.experimental.useTsgo": true
+  "js/ts.experimental.useTsgo": true,
+  "oxc.disableNestedConfig": true,
+  "oxc.fmt.disableNestedConfig": true,
+  "editor.formatOnSaveMode": "file"
 }

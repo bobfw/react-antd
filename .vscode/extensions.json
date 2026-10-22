@@ -5,6 +5,7 @@
     "EditorConfig.EditorConfig",
     "bradlc.vscode-tailwindcss",
     "styled-components.vscode-styled-components",
-    "oxc.oxc-vscode"
+    "oxc.oxc-vscode",
+    "VoidZero.vite-plus-extension-pack"
   ]
 }
